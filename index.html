@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Foru · 张怀民｜意思流语音交互 Demo</title>
+<style>
+:root{--bg:#0b0e14;--panel:#121722;--panel2:#171e2b;--text:#eef3fb;--muted:#94a3b8;--line:#263247;--accent:#7c9cff;--accent2:#75e1c3;--warn:#ffc971;--danger:#ff7f96;--shadow:0 18px 48px rgba(0,0,0,.28)}
+*{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 20% 0%,#172037 0,#0b0e14 38%),var(--bg);color:var(--text);font:14px/1.55 Inter,"Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;min-height:100vh}.app{max-width:1440px;margin:auto;padding:22px}.topbar{display:flex;gap:18px;align-items:center;justify-content:space-between;margin-bottom:18px}.brand{display:flex;align-items:center;gap:14px}.logo{width:46px;height:46px;border-radius:15px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;font-weight:800;color:#07101e;box-shadow:0 10px 30px rgba(124,156,255,.3)}h1{font-size:20px;margin:0}.sub{color:var(--muted);font-size:12px}.status-pill{border:1px solid var(--line);background:rgba(18,23,34,.76);border-radius:999px;padding:8px 12px;display:flex;align-items:center;gap:8px}.dot{width:9px;height:9px;border-radius:50%;background:var(--accent2);box-shadow:0 0 16px var(--accent2)}.grid{display:grid;grid-template-columns:270px minmax(440px,1fr) 330px;gap:16px}.panel{background:linear-gradient(180deg,rgba(23,30,43,.95),rgba(15,20,30,.95));border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow)}.timeline{padding:16px}.timeline h2,.brain h2{font-size:13px;margin:0 0 12px;color:#c9d5e8}.scene{display:flex;gap:11px;padding:13px 10px;border-radius:14px;border:1px solid transparent;cursor:pointer;transition:.2s}.scene:hover{background:#1a2231}.scene.active{background:linear-gradient(90deg,rgba(124,156,255,.16),rgba(117,225,195,.06));border-color:#324462}.scene .num{min-width:28px;height:28px;border-radius:9px;display:grid;place-items:center;border:1px solid #344158;color:#b9c7dc;font-weight:700}.scene.active .num{background:var(--accent);color:#0b1020;border-color:transparent}.scene strong{display:block;font-size:13px}.scene small{color:var(--muted)}.main{padding:18px;min-height:720px;display:flex;flex-direction:column}.hero{display:grid;grid-template-columns:1fr auto;align-items:start;gap:12px}.hero h2{margin:0;font-size:18px}.tag{font-size:11px;padding:6px 9px;border-radius:999px;border:1px solid var(--line);color:#b9c7dc}.orb-wrap{display:grid;place-items:center;padding:24px 0 18px}.orb{width:166px;height:166px;border-radius:50%;position:relative;background:radial-gradient(circle at 34% 28%,#d7e1ff 0,#9ab1ff 10%,#667fdb 28%,#27304f 62%,#111725 100%);box-shadow:0 0 0 14px rgba(124,156,255,.05),0 0 72px rgba(124,156,255,.26);transition:.3s}.orb:before,.orb:after{content:"";position:absolute;inset:-11px;border-radius:50%;border:1px solid rgba(124,156,255,.25);animation:pulse 2.2s infinite}.orb:after{inset:-24px;animation-delay:.8s}.orb.waiting{filter:saturate(.6);box-shadow:0 0 56px rgba(117,225,195,.2)}.orb.speaking{animation:breath .8s infinite alternate}.orb.interrupted{box-shadow:0 0 70px rgba(255,127,150,.32)}@keyframes pulse{0%,100%{transform:scale(.96);opacity:.35}50%{transform:scale(1.03);opacity:.9}}@keyframes breath{to{transform:scale(1.035)}}.state-title{text-align:center;font-size:17px;font-weight:750}.state-sub{text-align:center;color:var(--muted);margin-top:3px}.dialog{flex:1;min-height:278px;max-height:340px;overflow:auto;padding:6px 4px 4px;scrollbar-width:thin}.msg{display:flex;margin:10px 0}.msg.user{justify-content:flex-end}.bubble{max-width:78%;border-radius:16px;padding:10px 12px;border:1px solid var(--line);background:#171f2e}.msg.user .bubble{background:#223052;border-color:#344e7d}.speaker{font-size:10px;color:var(--muted);margin-bottom:3px}.action-card{margin:12px 0;padding:12px 13px;border:1px solid #34445d;border-radius:14px;background:rgba(117,225,195,.06)}.action-card b{color:#baf4e5}.controls{border-top:1px solid var(--line);padding-top:14px}.control-row{display:flex;gap:8px;flex-wrap:wrap}.btn{border:1px solid #344158;background:#151d2b;color:#eaf0fa;border-radius:11px;padding:9px 11px;cursor:pointer;font:inherit;transition:.18s}.btn:hover{transform:translateY(-1px);background:#1d293d}.btn.primary{background:linear-gradient(135deg,#708cff,#75e1c3);color:#08101c;border:0;font-weight:750}.btn.danger{border-color:#70404e;color:#ffd4dc}.hint{margin-top:9px;color:#7f90a8;font-size:11px}.brain{padding:16px}.metric{margin:10px 0}.metric-head{display:flex;justify-content:space-between;font-size:11px;color:#b9c7dc}.bar{height:7px;background:#202a3b;border-radius:99px;overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;width:50%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:99px;transition:.35s}.decision{margin:15px 0;padding:12px;border-radius:14px;background:#0f1520;border:1px solid #2c3950}.decision label{font-size:10px;color:var(--muted);display:block}.decision strong{font-size:15px}.ledger{margin-top:12px}.ledger-item{padding:9px 0;border-bottom:1px solid #263247}.ledger-item small{color:var(--muted);display:block}.memory{margin-top:12px}.mem-chip{display:inline-flex;margin:4px 4px 0 0;padding:6px 8px;border-radius:9px;background:#19293a;border:1px solid #2b435d;color:#cfe7ff;font-size:11px}.legend{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px}.legend div{padding:9px;border-radius:12px;background:#111827;border:1px solid #253148;text-align:center;font-size:10px;color:#aebbd0}.footer{margin-top:16px;color:#728198;font-size:11px;text-align:center}@media(max-width:1050px){.grid{grid-template-columns:220px 1fr}.brain{grid-column:1/-1}.main{min-height:620px}}@media(max-width:720px){.app{padding:12px}.grid{grid-template-columns:1fr}.timeline{order:2}.main{order:1}.brain{order:3}.topbar{align-items:flex-start}.status-pill{display:none}.bubble{max-width:90%}.legend{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <div class="brand"><div class="logo">F</div><div><h1>Foru <span style="font-weight:500;color:#9fb0ca">· 中文人格名「张怀民」</span></h1><div class="sub">意思流语音交互原型｜你想说时，我在；你没说完，我等；不该出声时，我懂。</div></div></div>
+    <div class="status-pill"><span class="dot"></span><span id="sessionText">伴随流未开始</span></div>
+  </div>
+  <div class="grid">
+    <aside class="panel timeline">
+      <h2>连续 Case · 17:40 → 19:20</h2>
+      <div id="sceneList"></div>
+      <div style="height:10px"></div>
+      <button class="btn primary" style="width:100%" id="autoBtn">▶ 自动演示完整流程</button>
+      <button class="btn" style="width:100%;margin-top:8px" id="resetBtn">↺ 重置 Demo</button>
+      <div class="hint">无需 API、无需账号。按钮驱动的是内置状态机；支持浏览器 TTS 时可选语音播报。</div>
+    </aside>
+
+    <main class="panel main">
+      <div class="hero"><div><h2 id="sceneTitle">准备开始</h2><div class="sub" id="sceneDesc">一次唤醒，跨越运动、移动、驾驶与安静公共空间。</div></div><span class="tag" id="modeTag">FLOW SESSION</span></div>
+      <div class="orb-wrap"><div><div class="orb waiting" id="orb"></div><div class="state-title" id="stateTitle">待命</div><div class="state-sub" id="stateSub">等待用户开启一段“伴随流”</div></div></div>
+      <div class="dialog" id="dialog"></div>
+      <div class="controls">
+        <div class="control-row" id="controls"></div>
+        <div class="control-row" style="margin-top:8px"><button class="btn" id="ttsBtn">🔊 TTS：关</button><button class="btn" id="debugBtn">🧠 决策面板：开</button><button class="btn" id="nextBtn">下一步 →</button></div>
+        <div class="hint">重点观察右侧：Foru 不是“识别到声音就回应”，而是先判断 <b>是不是你 → 是不是对我说 → 你说完没有 → 我该以什么模态回应</b>。</div>
+      </div>
+      <div class="legend"><div>IGNORE<br>忽略噪声</div><div>WAIT<br>等你说完</div><div>BACKCHANNEL<br>轻反馈</div><div>SPEAK<br>简洁出声</div><div>SILENT ACT<br>静默执行</div></div>
+    </main>
+
+    <aside class="panel brain" id="brain">
+      <h2>Foru · Right-to-Speak 决策器</h2>
+      <div class="metric"><div class="metric-head"><span>Addressed to AI</span><b id="mAddress">0%</b></div><div class="bar"><i id="bAddress" style="width:0%"></i></div></div>
+      <div class="metric"><div class="metric-head"><span>Turn-end Probability</span><b id="mTurn">0%</b></div><div class="bar"><i id="bTurn" style="width:0%"></i></div></div>
+      <div class="metric"><div class="metric-head"><span>Barge-in Probability</span><b id="mBarge">0%</b></div><div class="bar"><i id="bBarge" style="width:0%"></i></div></div>
+      <div class="metric"><div class="metric-head"><span>Privacy / Social Sensitivity</span><b id="mPrivacy">0%</b></div><div class="bar"><i id="bPrivacy" style="width:0%"></i></div></div>
+      <div class="decision"><label>本轮输出策略</label><strong id="decision">WAIT</strong><div class="sub" id="decisionWhy">未开始</div></div>
+      <div class="ledger"><h2>“说过账本” Output Ledger</h2><div id="ledger"></div></div>
+      <div class="memory"><h2>“默契资产” Memory Assets</h2><div id="memory"></div></div>
+    </aside>
+  </div>
+  <div class="footer">Foru / 张怀民 · local deterministic demo · v1.0 · 2026-09-08</div>
+</div>
+<script>
+const scenes=[
+ {name:'健身房 · 高噪运动',time:'17:40',desc:'耳机佩戴，环境 78dB。测试喘气/器械声误触发、思考停顿、真打断。'},
+ {name:'更衣区 · 半公开',time:'18:10',desc:'人声靠近。测试隐私内容不外放、动态切换为耳语/上屏。'},
+ {name:'驾驶 · 车机接力',time:'18:25',desc:'手机 → 车机无缝接管。测试强专注状态、路况噪声、路线纠正。'},
+ {name:'图书馆 · 极安静',time:'19:05',desc:'用户耳语。测试静默执行、被打断内容恢复、长期交互偏好沉淀。'}
+];
+const steps=[
+ {scene:0,title:'开启伴随流',state:'聆听中',sub:'显式开启：仅在这段任务/旅程中持续在线',metrics:[96,82,5,15],decision:'LISTEN',why:'用户明确说“陪我到回家”',user:'Foru，今晚陪我到回家。先帮我看着训练。',ai:'好。我会保持在场，但只在你叫我、需要纠正或有风险时开口。',action:'伴随流已开启 · 预计持续至回家',controls:['noise','pause','next']},
+ {scene:0,title:'误触发防护',state:'安静在场',sub:'喘气、杠铃落地、旁人说话都不抢话',metrics:[8,12,6,18],decision:'IGNORE',why:'非目标声纹 + 无指向性语义',user:'（急促喘气）呼……哈……（杠铃落地）',ai:null,action:'未触发回复 · Foru 保持训练计时',controls:['pause','next']},
+ {scene:0,title:'语义话轮判断',state:'等待中',sub:'识别“呃…”为未完成，而不是把静音当句号',metrics:[91,18,8,14],decision:'WAIT',why:'语义未闭合 + 句尾延续韵律',user:'下一组我想练……呃……',ai:'（不抢答，继续等待）',controls:['interrupt','next']},
+ {scene:0,title:'真打断 + 说过账本',state:'被打断',sub:'停止未播放部分，只承认用户真正听见的内容',metrics:[98,88,97,14],decision:'BARGE-IN → LISTEN',why:'本人声纹 + “等等/不对”纠正意图',user:'下一组做什么？',ai:'按你原计划，下一组深蹲 4 组，每组——',interruption:'等等，不对，我膝盖今天有点酸，换成拉伸。',action:'停止在「每组——」；未播报内容作废',controls:['next']},
+ {scene:1,title:'从动到静：模态自动收敛',state:'低声回应',sub:'环境从 78dB 降至 44dB，且附近有人',metrics:[94,84,6,79],decision:'WHISPER + SCREEN',why:'半公开环境 + 日程隐私',user:'我今晚后面还有什么事？',ai:'19:30 有一项私人安排。详情我放到屏幕，不念出来。',action:'手机亮屏 · 轻震一下 · 隐私字段不上 TTS',controls:['next']},
+ {scene:2,title:'跨设备接力',state:'车载安全模式',sub:'同一条 Flow Session 从耳机移交车机，不重新交代上下文',metrics:[97,91,7,28],decision:'SPEAK · SHORT',why:'驾驶强专注态：只播关键确认',user:'上车了，去图书馆。',ai:'已切到车机。图书馆 24 分钟，开始导航。',action:'手机 → 车机 Handoff · 上下文与打断游标同步',controls:['noise','interrupt','next']},
+ {scene:2,title:'驾驶噪声与路线纠正',state:'被打断',sub:'鸣笛不打断；用户“等等”立即截停当前导航解释',metrics:[99,94,98,22],decision:'BARGE-IN → EXECUTE',why:'纠正词 + 本人声纹 + 导航上下文强相关',user:'（鸣笛声）',ai:'前方 800 米上高架，预计节省——',interruption:'等等，别走高架，我今天想轻松一点。',action:'立即改走地面路线 · 不追问无关细节',controls:['next']},
+ {scene:3,title:'耳语 → 静默执行',state:'静默模式',sub:'极低底噪 + 用户耳语 + 任务包含较长内容',metrics:[96,92,4,96],decision:'SILENT ACT',why:'安静公共空间，长内容不适合口播',user:'（耳语）把刚才健身房那套拉伸发我。',ai:'（仅耳机轻提示音）',action:'屏幕展示 8 分钟拉伸卡片 · 手表轻震',controls:['memory','next']},
+ {scene:3,title:'把互动变成“默契资产”',state:'学习中',sub:'只沉淀可复用、可解释、可管理的偏好',metrics:[98,91,5,90],decision:'CONFIRM + SAVE',why:'明确长期偏好，置信度高',user:'以后健身房别每组都提醒我，组间说一次就行。开车也尽量说短一点。',ai:'记住了：训练只在组间提醒；驾驶默认短确认。你随时可以在“默契卡”里改。',action:'新增 2 条可见记忆卡 · 跨设备生效',controls:['memory','finish']},
+ {scene:3,title:'Demo 完成',state:'伴随流结束',sub:'一条连续语境结束，但用户授权的“默契资产”留下',metrics:[0,0,0,0],decision:'SESSION CLOSED',why:'用户到达目的地并结束伴随期',user:'到啦，先这样。',ai:'好。今晚的流结束。下次你需要时再叫我。',action:'会话态清空 · 长期偏好保留',controls:['memory']}
+];
+let stepIndex=-1,tts=false,autoTimer=null;
+const el=id=>document.getElementById(id);
+function renderScenes(){el('sceneList').innerHTML=scenes.map((s,i)=>`<div class="scene ${currentScene()==i?'active':''}" data-scene="${i}"><div class="num">${i+1}</div><div><strong>${s.name}</strong><small>${s.time} · ${s.desc}</small></div></div>`).join('');document.querySelectorAll('.scene').forEach(n=>n.onclick=()=>jumpScene(+n.dataset.scene));}
+function currentScene(){return stepIndex<0?0:steps[Math.max(0,stepIndex)].scene}
+function addMsg(kind,text){if(!text)return; const d=document.createElement('div');d.className='msg '+kind;d.innerHTML=`<div class="bubble"><div class="speaker">${kind==='user'?'用户':'Foru'}</div>${text}</div>`;el('dialog').appendChild(d);el('dialog').scrollTop=el('dialog').scrollHeight;if(kind==='ai'&&tts) speak(text.replace(/<[^>]+>/g,''));}
+function addAction(text){if(!text)return;const d=document.createElement('div');d.className='action-card';d.innerHTML=`<b>系统动作</b><br>${text}`;el('dialog').appendChild(d);el('dialog').scrollTop=el('dialog').scrollHeight}
+function setMetric(id,v){el('m'+id).textContent=v+'%';el('b'+id).style.width=v+'%'}
+function setState(s){const orb=el('orb');orb.className='orb'; if(s.state.includes('等待')||s.state.includes('安静'))orb.classList.add('waiting');else if(s.state.includes('被打断'))orb.classList.add('interrupted');else if(s.state.includes('回应')||s.state.includes('车载'))orb.classList.add('speaking');else orb.classList.add('waiting');el('stateTitle').textContent=s.state;el('stateSub').textContent=s.sub;}
+function renderControls(list){const labels={noise:'制造噪声/喘气',pause:'说一半停住',interrupt:'“等等，不对…”',memory:'查看默契资产',finish:'结束伴随流',next:'继续'};el('controls').innerHTML=(list||[]).map(k=>`<button class="btn ${k==='interrupt'?'danger':''}" data-act="${k}">${labels[k]}</button>`).join('');document.querySelectorAll('[data-act]').forEach(b=>b.onclick=()=>handleAction(b.dataset.act));}
+function handleAction(a){if(a==='noise'){flash('IGNORE：不是有效对话，不回应');} else if(a==='pause'){flash('WAIT：检测到语义未完成，继续等');} else if(a==='interrupt'){flash('BARGE-IN：停止 TTS，切回聆听');} else if(a==='memory'){showMemory(true);} else if(a==='finish'){go(steps.length-1);} else next();}
+function flash(t){el('decisionWhy').textContent=t;setTimeout(()=>{if(stepIndex>=0) el('decisionWhy').textContent=steps[stepIndex].why},1300)}
+function showLedger(i){let items=[]; if(i>=3)items.push(['健身房回答','已播放到：深蹲 4 组，每组——','游标后内容已撤销']); if(i>=6)items.push(['导航播报','已播放到：前方 800 米上高架，预计节省——','被用户纠正，旧路线说明作废']); el('ledger').innerHTML=items.length?items.map(x=>`<div class="ledger-item"><b>${x[0]}</b><small>${x[1]}</small><small>${x[2]}</small></div>`).join(''):'<div class="sub">暂无被打断输出</div>';}
+function showMemory(pop=false){let chips=['公开场所：隐私内容不上外放'];if(stepIndex>=8)chips.push('训练：仅组间提醒','驾驶：默认短确认');el('memory').innerHTML=chips.map(x=>`<span class="mem-chip">${x}</span>`).join('');if(pop) flash('这些记忆可查看、修改、删除；不是黑箱画像。');}
+function go(i){clearTimeout(autoTimer);stepIndex=Math.max(0,Math.min(i,steps.length-1));const s=steps[stepIndex],sc=scenes[s.scene];renderScenes();el('sessionText').textContent=stepIndex===steps.length-1?'伴随流已结束':`伴随流进行中 · ${sc.name}`;el('sceneTitle').textContent=s.title;el('sceneDesc').textContent=sc.desc;el('modeTag').textContent=['GYM / ACTIVE','PUBLIC / PRIVATE','DRIVE / FOCUS','QUIET / SILENT'][s.scene];setState(s);setMetric('Address',s.metrics[0]);setMetric('Turn',s.metrics[1]);setMetric('Barge',s.metrics[2]);setMetric('Privacy',s.metrics[3]);el('decision').textContent=s.decision;el('decisionWhy').textContent=s.why;el('dialog').innerHTML='';addMsg('user',s.user);addMsg('ai',s.ai);if(s.interruption){setTimeout(()=>addMsg('user',`<b>${s.interruption}</b>`),300)}setTimeout(()=>addAction(s.action),420);showLedger(stepIndex);showMemory();renderControls(s.controls);}
+function next(){go(stepIndex<0?0:stepIndex+1)}
+function jumpScene(scene){const idx=steps.findIndex(x=>x.scene===scene);go(idx)}
+function reset(){clearTimeout(autoTimer);stepIndex=-1;renderScenes();el('sessionText').textContent='伴随流未开始';el('sceneTitle').textContent='准备开始';el('sceneDesc').textContent='一次唤醒，跨越运动、移动、驾驶与安静公共空间。';el('modeTag').textContent='FLOW SESSION';el('stateTitle').textContent='待命';el('stateSub').textContent='等待用户开启一段“伴随流”';el('dialog').innerHTML='<div class="action-card"><b>演示目标</b><br>点击“自动演示完整流程”，或逐步操作。右侧决策器会解释 Foru 为什么选择沉默、等待、打断、出声、耳语或静默执行。</div>';['Address','Turn','Barge','Privacy'].forEach(x=>setMetric(x,0));el('decision').textContent='WAIT';el('decisionWhy').textContent='未开始';el('ledger').innerHTML='<div class="sub">暂无被打断输出</div>';showMemory();renderControls(['next']);}
+function auto(){clearTimeout(autoTimer);let i=0;function run(){go(i++);if(i<steps.length)autoTimer=setTimeout(run,1750)}run()}
+function speak(text){if(!('speechSynthesis'in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='zh-CN';u.rate=1.03;speechSynthesis.speak(u)}
+el('autoBtn').onclick=auto;el('resetBtn').onclick=reset;el('nextBtn').onclick=next;el('ttsBtn').onclick=()=>{tts=!tts;el('ttsBtn').textContent='🔊 TTS：'+(tts?'开':'关')};el('debugBtn').onclick=()=>{const b=el('brain');b.style.display=b.style.display==='none'?'block':'none';el('debugBtn').textContent='🧠 决策面板：'+(b.style.display==='none'?'关':'开')};reset();
+</script>
+</body>
+</html>
